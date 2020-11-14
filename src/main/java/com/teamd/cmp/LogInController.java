@@ -9,15 +9,7 @@ public class LogInController {
 
     @PostMapping("/login")
     String logIn(@RequestParam("type") int type,@RequestParam("id") int id,@RequestParam("pass") String pass){
-        if(type==0){
 
-        }
-        else if(type==1){
-
-        }
-        else if(type==2){
-
-        }
         return "Error , Don't Use Shortcuts...";
     }
 
