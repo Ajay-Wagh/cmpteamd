@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="cmp" target="11" />
+      <module name="cmp" target="1.8.0" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
