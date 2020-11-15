@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.Random;
+
 
 @RestController
 public class LogInController {
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    RelationshipManagerRepository relationshipManagerRepository;
 
     @PostMapping("/login")
     String logIn(@RequestParam("type") int type,@RequestParam("id") int id,@RequestParam("pass") String pass){
@@ -26,19 +26,7 @@ public class LogInController {
                     String generatedString = TokenGenerator.newToken();
                     c.setToken(generatedString);
                     customerRepository.save(c);
-
-                    StringBuilder contentBuilder = new StringBuilder();
-                    try {
-                        BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Ajay\\cmpteamd\\src\\main\\resources\\static\\update.html"));
-                        String str;
-                        while ((str = in.readLine()) != null) {
-                            contentBuilder.append(str);
-                        }
-                        in.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    String content = contentBuilder.toString();
+                    String content = getFileContent("update.html");
                     content=content.replace("DeliveredId",String.valueOf(c.getId()));
                     content=content.replace("DeliveredName",String.valueOf(c.getName()));
                     content=content.replace("DeliveredToken",generatedString);
@@ -50,6 +38,23 @@ public class LogInController {
                     return content;
                 }
             }
+        }
+        else if(type==1){
+            if(relationshipManagerRepository.findById(id).isPresent()){
+                RelationshipManager r=relationshipManagerRepository.findById(id).get();
+                if(pass.equals(r.getPassword())){
+                    String generatedString = TokenGenerator.newToken();
+                    r.setToken(generatedString);
+                    relationshipManagerRepository.save(r);
+                    String content = getFileContent("searchdetails.html");
+                    content=content.replace("DeliveredType",String.valueOf(type));
+                    content=content.replace("DeliveredId",String.valueOf(id));
+                    content=content.replace("DeliveredToken",generatedString);
+                    return content;
+
+                }
+            }
+            return "Wrong Credentials...";
         }
 
 
@@ -63,9 +68,18 @@ public class LogInController {
                 Customer c=customerRepository.findById(id).get();
                 if(c.getToken().equals(token)) {
                     c.setToken(TokenGenerator.newToken());
-                    return "<head>\n" +
-                            "  <meta http-equiv='refresh' content='0; URL=index.html'>\n" +
-                            "</head>";
+                    customerRepository.save(c);
+                    return returnHome();
+                }
+            }
+        }
+        else if(type==1){
+            if(relationshipManagerRepository.findById(id).isPresent()){
+                RelationshipManager r=relationshipManagerRepository.findById(id).get();
+                if(r.getToken().equals(token)) {
+                    r.setToken(TokenGenerator.newToken());
+                    relationshipManagerRepository.save(r);
+                    return returnHome();
                 }
             }
         }
@@ -74,5 +88,26 @@ public class LogInController {
         return "Error , Something Went Wrong...";
     }
 
+
+    static String getFileContent(String fileName){
+        StringBuilder contentBuilder = new StringBuilder();
+        try {
+            BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Ajay\\cmpteamd\\src\\main\\resources\\static\\"+fileName));
+            String str;
+            while ((str = in.readLine()) != null) {
+                contentBuilder.append(str);
+            }
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return contentBuilder.toString();
+    }
+
+    static String returnHome(){
+        return "<head>\n" +
+                "  <meta http-equiv='refresh' content='0; URL=index.html'>\n" +
+                "</head>";
+    }
 
 }
