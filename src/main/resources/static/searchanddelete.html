@@ -1,15 +1,15 @@
 <head>
     <meta charset="UTF-8">
-    <title>Search Details</title>
+    <title>Manage Details</title>
 </head>
 <body>
 <center>
-    <h1>Customer Search Portal</h1>
+    <h1>Customer Search and Delete Portal</h1>
     <br>
     <br>
     <br>
     <br>
-    <form method="post" action="/search">
+    <form method="post" action="/searchanddelete">
         <input type="hidden" name="type" value="DeliveredType">
         <input type="hidden" name="id" value="DeliveredId">
         <input type="hidden" name="token" value="DeliveredToken">
@@ -32,6 +32,13 @@
 
     <br>
     <br>
+    <form method="post" action="/searchanddelete_delete">
+        <input type="hidden" name="type" value="DeliveredType">
+        <input type="hidden" name="id" value="DeliveredId">
+        <input type="hidden" name="token" value="DeliveredToken">
+        <input type="hidden" name="deleteid" value="ResultId">
+        <button type="submit">Delete</button>
+    </form>
     <br>
     <br>
 

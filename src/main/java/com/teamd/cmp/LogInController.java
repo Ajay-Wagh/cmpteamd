@@ -65,7 +65,7 @@ public class LogInController {
                     String generatedString = TokenGenerator.newToken();
                     c.setToken(generatedString);
                     companyOperatorRepository.save(c);
-                    String content = getFileContent("searchdetails.html");
+                    String content = getFileContent("searchanddelete.html");
                     content=content.replace("DeliveredType",String.valueOf(type));
                     content=content.replace("DeliveredId",String.valueOf(id));
                     content=content.replace("DeliveredToken",generatedString);

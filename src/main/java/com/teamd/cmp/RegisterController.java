@@ -22,11 +22,12 @@ public class RegisterController {
                 c.setPassword(pass);
                 c.setToken(TokenGenerator.newToken());
                 customerRepository.save(c);
-                return "Your Id is "+customerRepository.fetchCustomers(contact).get(0).getId();
+                return "Your Id is "+customerRepository.fetchCustomers(contact).get(0).getId()+", <a href=\"index.html\">click here</a> to LogIn.";
             }
+            return "Contact already exists..<a href=\"register.html\">click here</a> to register again.";
 
         }
-        return "Entered Data is "+name+" "+address+" "+email+" "+contact+" "+pass;
+        return "Something Went Wrong...";
     }
 
 }
