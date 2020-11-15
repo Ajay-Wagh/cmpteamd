@@ -11,4 +11,5 @@ public class RegisterController {
     String register(@RequestParam("name") String name,@RequestParam("address") String address,@RequestParam("email") String email,@RequestParam("contact") String contact,@RequestParam("pass") String pass){
         return "Entered Data is "+name+" "+address+" "+email+" "+contact+" "+pass;
     }
+
 }
