@@ -16,6 +16,8 @@ public class LogInController {
     CustomerRepository customerRepository;
     @Autowired
     RelationshipManagerRepository relationshipManagerRepository;
+    @Autowired
+    CompanyOperatorRepository companyOperatorRepository;
 
     @PostMapping("/login")
     String logIn(@RequestParam("type") int type,@RequestParam("id") int id,@RequestParam("pass") String pass){
@@ -56,9 +58,26 @@ public class LogInController {
             }
             return "Wrong Credentials...";
         }
+        else if(type==2){
+            if(companyOperatorRepository.findById(id).isPresent()){
+                CompanyOperator c=companyOperatorRepository.findById(id).get();
+                if(pass.equals(c.getPassword())){
+                    String generatedString = TokenGenerator.newToken();
+                    c.setToken(generatedString);
+                    companyOperatorRepository.save(c);
+                    String content = getFileContent("searchdetails.html");
+                    content=content.replace("DeliveredType",String.valueOf(type));
+                    content=content.replace("DeliveredId",String.valueOf(id));
+                    content=content.replace("DeliveredToken",generatedString);
+                    return content;
+
+                }
+            }
+            return "Wrong Credentials...";
+        }
 
 
-        return "Error , Wrong Credentials";
+        return "Error , Something Went Wrong..";
     }
 
     @PostMapping("/logout")
@@ -79,6 +98,16 @@ public class LogInController {
                 if(r.getToken().equals(token)) {
                     r.setToken(TokenGenerator.newToken());
                     relationshipManagerRepository.save(r);
+                    return returnHome();
+                }
+            }
+        }
+        else if(type==2){
+            if(companyOperatorRepository.findById(id).isPresent()){
+                CompanyOperator c=companyOperatorRepository.findById(id).get();
+                if(c.getToken().equals(token)) {
+                    c.setToken(TokenGenerator.newToken());
+                    companyOperatorRepository.save(c);
                     return returnHome();
                 }
             }
