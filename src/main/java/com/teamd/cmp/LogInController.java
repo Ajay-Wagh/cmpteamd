@@ -40,6 +40,7 @@ public class LogInController {
                     return content;
                 }
             }
+            return "Wrong Credentials...";
         }
         else if(type==1){
             if(relationshipManagerRepository.findById(id).isPresent()){
