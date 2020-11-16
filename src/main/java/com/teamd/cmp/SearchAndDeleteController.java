@@ -63,7 +63,7 @@ public class SearchAndDeleteController {
                 }
             }
         }
-        return "hi";
+        return "Something Went Wrong..";
     }
 
     CustomerDeleted getCustomerDeleted(Customer c){

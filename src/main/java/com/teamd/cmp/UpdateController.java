@@ -17,7 +17,7 @@ public class UpdateController {
 
        if(customerRepository.findById(id).isPresent()){
            Customer c=customerRepository.findById(id).get();
-           if(c.getToken().equals(token)){
+           if(c.getToken().equals(token) && name.length()>0 && address.length()>0 && contact.length()>0 && pass.length()>0 && email.length()>0){
                if(contact.equals(c.getContact())){
                    updateDetails(c,name,address,contact,pass,TokenGenerator.newToken(),email);
                }else if(customerRepository.fetchCustomers(contact).isEmpty()){
