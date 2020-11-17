@@ -40,11 +40,12 @@
 				  "credentials": "include"
 				}).then(response => response.text())
     			.then(data =>{
-    				$("#details").show();
 					var cust=JSON.parse(data);
     				if(cust.hasOwnProperty("error")){
     					alert(cust.error);
+    					$("#details").hide();
     				}else{
+    					$("#details").show();
 						for (const property in cust) {
 							$(`#${property}`).text(`${cust[property]}`);
 						}

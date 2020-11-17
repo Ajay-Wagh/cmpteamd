@@ -27,7 +27,7 @@ public class RegisterController {
                 c.setToken(TokenGenerator.newToken());
                 customerRepository.save(c);
                 int id=customerRepository.fetchCustomers(contact).get(0).getId();
-                String content = getFileContent("registration_divert.html");
+                String content = LogInController.getFileContent("registration_divert.html");
                 content=content.replace("DeliveredID",String.valueOf(id));
                 return content;
             }
@@ -35,21 +35,6 @@ public class RegisterController {
 
         }
         return "Something Went Wrong...";
-    }
-
-    static String getFileContent(String fileName){
-        StringBuilder contentBuilder = new StringBuilder();
-        try {
-            BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Shubham\\Desktop\\Dispur Wireless\\back\\cmpteamd\\src\\main\\resources\\static\\"+fileName));
-            String str;
-            while ((str = in.readLine()) != null) {
-                contentBuilder.append(str);
-            }
-            in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return contentBuilder.toString();
     }
 
 }

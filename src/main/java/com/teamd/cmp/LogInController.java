@@ -129,7 +129,7 @@ public class LogInController {
     static String getFileContent(String fileName){
         StringBuilder contentBuilder = new StringBuilder();
         try {
-            BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Shubham\\Desktop\\Dispur Wireless\\back\\cmpteamd\\src\\main\\resources\\static\\"+fileName));
+            BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Ajay\\cmpteamd\\src\\main\\resources\\static\\"+fileName));
             String str;
             while ((str = in.readLine()) != null) {
                 contentBuilder.append(str);
