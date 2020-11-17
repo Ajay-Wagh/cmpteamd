@@ -1,0 +1,45 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+</head>
+<body>
+<center>
+    <h1>Customer Updation Portal</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <form method="post" action="/update">
+        Id : DeliveredId
+        <input type="hidden" name="id" value="DeliveredId">
+        <input type="hidden" name="token" value="DeliveredToken">
+        <br>
+        <br>
+        Name : <input type="text" name="name" value="DeliveredName">
+        <br>
+        <br>
+        Email : <input type="email" name="email" value="DeliveredEmail">
+        <br>
+        <br>
+        Password : <input type="password" name="pass" value="DeliveredPassword">
+        <br>
+        <br>
+        Address : <input type="text" name="address" value="DeliveredAddress">
+        <br>
+        <br>
+        Contact : <input type="text" name="contact"  maxlength="10" value="DeliveredContact">
+        <br>
+        <br>
+        <button type="submit">Update</button>
+        <br>
+        <br>
+    </form>
+
+    <form method="post" action="/logout">
+        <input type="hidden" name="type" value="DeliveredType">
+        <input type="hidden" name="id" value="DeliveredId">
+        <input type="hidden" name="token" value="DeliveredToken">
+        <button type="submit">Logout</button>
+    </form>
+</center>
+</body>

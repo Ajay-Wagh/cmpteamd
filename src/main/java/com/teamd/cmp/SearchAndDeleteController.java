@@ -1,5 +1,7 @@
 package com.teamd.cmp;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,14 +19,14 @@ public class SearchAndDeleteController {
 
 
     @PostMapping("/searchanddelete")
-    String search(@RequestParam("type") int type, @RequestParam("id") int id, @RequestParam("queryid") int queryid, @RequestParam("token") String token){
+    String search(@RequestParam("type") int type, @RequestParam("id") int id, @RequestParam("queryid") int queryid, @RequestParam("token") String token) throws JsonProcessingException {
         if(type==2){
             if(companyOperatorRepository.findById(id).isPresent()){
                 CompanyOperator c=companyOperatorRepository.findById(id).get();
                 if(token.equals(c.getToken())){
                     if(customerRepository.findById(queryid).isPresent()){
                         String generatedString = TokenGenerator.newToken();
-                        c.setToken(generatedString);
+                        //c.setToken(generatedString);
                         companyOperatorRepository.save(c);
                         Customer cm=customerRepository.findById(queryid).get();
                         String content = LogInController.getFileContent("searchanddelete.html");
@@ -36,9 +38,12 @@ public class SearchAndDeleteController {
                         content=content.replace("DeliveredType",String.valueOf(type));
                         content=content.replace("DeliveredId",String.valueOf(id));
                         content=content.replace("DeliveredToken",generatedString);
-                        return content;
+                        ObjectMapper mapper = new ObjectMapper();
+                        //Converting the Object to JSONString
+                        String jsonString = mapper.writeValueAsString(cm);
+                        return jsonString;
                     }else {
-                        return "ID not Found!!";
+                        return "{\"error\":\"Id Not Found\"}";
                     }
                 }
             }

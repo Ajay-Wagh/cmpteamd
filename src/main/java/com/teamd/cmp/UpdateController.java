@@ -25,7 +25,8 @@ public class UpdateController {
                } else {
                    return "Contact Number Already Present.. Try Different";
                }
-               return "Details Updated.. kindly log in again.. <a href=\"index.html\">LogIn</a>";
+               //could let user stay
+               return "Details Updated.. kindly log in again.. <a href=\"customer_login.html\">LogIn</a>";
            }
        }
 
