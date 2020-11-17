@@ -28,7 +28,8 @@ public class LogInController {
                     String generatedString = TokenGenerator.newToken();
                     c.setToken(generatedString);
                     customerRepository.save(c);
-                    String content = getFileContent("update.html");
+                    //String content = getFileContent("update.html");
+                    String content = getFileContent("customer_update.html");
                     content=content.replace("DeliveredId",String.valueOf(c.getId()));
                     content=content.replace("DeliveredName",String.valueOf(c.getName()));
                     content=content.replace("DeliveredToken",generatedString);
@@ -40,7 +41,9 @@ public class LogInController {
                     return content;
                 }
             }
-            return "Wrong Credentials...";
+            String content = getFileContent("customer_login.html");
+            content=content.replace("DeliveredWrongCred","true");
+            return content;
         }
         else if(type==1){
             if(relationshipManagerRepository.findById(id).isPresent()){
@@ -49,7 +52,7 @@ public class LogInController {
                     String generatedString = TokenGenerator.newToken();
                     r.setToken(generatedString);
                     relationshipManagerRepository.save(r);
-                    String content = getFileContent("searchdetails.html");
+                    String content = getFileContent("rm_homepage.html");
                     content=content.replace("DeliveredType",String.valueOf(type));
                     content=content.replace("DeliveredId",String.valueOf(id));
                     content=content.replace("DeliveredToken",generatedString);
@@ -57,7 +60,9 @@ public class LogInController {
 
                 }
             }
-            return "Wrong Credentials...";
+            String content = getFileContent("rm_login.html");
+            content=content.replace("DeliveredWrongCred","true");
+            return content;
         }
         else if(type==2){
             if(companyOperatorRepository.findById(id).isPresent()){
@@ -66,7 +71,7 @@ public class LogInController {
                     String generatedString = TokenGenerator.newToken();
                     c.setToken(generatedString);
                     companyOperatorRepository.save(c);
-                    String content = getFileContent("searchanddelete.html");
+                    String content = getFileContent("co_homepage.html");
                     content=content.replace("DeliveredType",String.valueOf(type));
                     content=content.replace("DeliveredId",String.valueOf(id));
                     content=content.replace("DeliveredToken",generatedString);
@@ -74,7 +79,9 @@ public class LogInController {
 
                 }
             }
-            return "Wrong Credentials...";
+            String content = getFileContent("co_login.html");
+            content=content.replace("DeliveredWrongCred","true");
+            return content;
         }
 
 
@@ -122,7 +129,7 @@ public class LogInController {
     static String getFileContent(String fileName){
         StringBuilder contentBuilder = new StringBuilder();
         try {
-            BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Ajay\\cmpteamd\\src\\main\\resources\\static\\"+fileName));
+            BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Shubham\\Desktop\\Dispur Wireless\\back\\cmpteamd\\src\\main\\resources\\static\\"+fileName));
             String str;
             while ((str = in.readLine()) != null) {
                 contentBuilder.append(str);

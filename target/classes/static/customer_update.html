@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="icon" href="img/logo.png" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="css/postlogin.css">
+    <title>Dispur Wireless|Customer Update</title>
+    <script>
+        function Logout(){
+         $("#logOut").submit();
+        }
+    </script>
+  </head>
+  <body class="d-flex flex-column min-vh-100" style="height:100vh;">
+
+    <nav  class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary py-3 mb-2">
+      <a class="navbar-brand" href="index.html">
+        <!-- <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="logo" loading="lazy"> -->
+        Dispur Wireless
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link " href="#">Home </a>
+        </li>
+        </ul>
+        <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Account
+          </a>
+          <div class="dropdown-menu bg-danger " aria-labelledby="navbarDropdown">
+            <a class="dropdown-item text-white" onclick="Logout()">Log Out</a>
+          </div>
+        </li>
+      </ul>
+      </div>
+    </nav>
+<div class="container justify-content-center">
+
+    <h1>Welcome DeliveredName!!</h1>
+   <form method="post" action="/update">
+       <input type="hidden" name="id" value="DeliveredId">
+       <input type="hidden" name="token" value="DeliveredToken">
+<div class="form-group">
+    <label for="formGroupExampleInput">Name</label>
+    <input type="text" class="form-control" id="formGroupExampleInput" name="name" value="DeliveredName" required>
+  </div>
+
+<div class="form-group">
+    <label for="formGroupExampleInput1">Address</label>
+    <input type="text" class="form-control" id="formGroupExampleInput1" name="address" value="DeliveredAddress" required>
+  </div>
+
+
+ <div class="form-group">
+    <label for="exampleFormControlInput1">Email ID</label>
+    <input type="email" class="form-control" id="exampleFormControlInput" name="email" value="DeliveredEmail" required>
+  </div>
+<div class="form-group">
+   <label for="exampleFormControlInput1">Password</label>
+   <input type="text" class="form-control" id="exampleFormControlInput1" name="pass" value="DeliveredPassword" required>
+</div>
+
+<div class="form-group">
+    <label for="formGroupExampleInput2">Contact</label>
+    <input type="text" class="form-control" id="formGroupExampleInput2" name="contact" value="DeliveredContact" required pattern="[1-9]{1}[0-9]{9}">
+  </div>
+
+     <div class="row">
+
+        <input class="btn btn-primary" type="submit" value="Update">
+
+
+     </div>
+   </form>
+    <form method="post" action="/logout" id="logOut" style="display:none;">
+        <input type="hidden" name="type" value="DeliveredType">
+        <input type="hidden" name="id" value="DeliveredId">
+        <input type="hidden" name="token" value="DeliveredToken">
+    </form>
+</div>
+    <footer class="mt-auto">
+        <div class="footer-copyright text-center py-2 bg-secondary text-white">© Copyright 2020:
+            <a  class="text-light" href="https://tcs.com"> Team D</a>
+        </div>
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

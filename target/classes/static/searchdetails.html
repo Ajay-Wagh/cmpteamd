@@ -1,0 +1,45 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Search Details</title>
+</head>
+<body>
+<center>
+    <h1>Customer Search Portal</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <form method="post" action="/search">
+        <input type="hidden" name="type" value="DeliveredType">
+        <input type="hidden" name="id" value="DeliveredId">
+        <input type="hidden" name="token" value="DeliveredToken">
+        Search Id : <input type="number" name="queryid">
+        <br>
+        <br>
+        <button type="submit">Search</button>
+        <br>
+        <br>
+    </form>
+
+    <br>
+    <br>
+
+    Id : ResultId <br><br>
+    Name : ResultName <br><br>
+    Address : ResultAddress <br><br>
+    Contact : ResultContact<br><br>
+    Email : ResultEmail
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <form method="post" action="/logout">
+        <input type="hidden" name="type" value="DeliveredType">
+        <input type="hidden" name="id" value="DeliveredId">
+        <input type="hidden" name="token" value="DeliveredToken">
+        <button type="submit">Logout</button>
+    </form>
+</center>
+</body>

@@ -1,5 +1,7 @@
 package com.teamd.cmp;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,14 +16,14 @@ public class SearchController {
     CustomerRepository customerRepository;
 
     @PostMapping("search")
-    String search(@RequestParam("type") int type,@RequestParam("id") int id,@RequestParam("queryid") int queryid,@RequestParam("token") String token){
+    String search(@RequestParam("type") int type,@RequestParam("id") int id,@RequestParam("queryid") int queryid,@RequestParam("token") String token) throws JsonProcessingException {
         if(type==1){
             if(relationshipManagerRepository.findById(id).isPresent()){
                 RelationshipManager r=relationshipManagerRepository.findById(id).get();
                 if(token.equals(r.getToken())){
                     if(customerRepository.findById(queryid).isPresent()){
                         String generatedString = TokenGenerator.newToken();
-                        r.setToken(generatedString);
+                        //r.setToken(generatedString);
                         relationshipManagerRepository.save(r);
                         Customer c=customerRepository.findById(queryid).get();
                         String content = LogInController.getFileContent("searchdetails.html");
@@ -33,9 +35,12 @@ public class SearchController {
                         content=content.replace("DeliveredType",String.valueOf(type));
                         content=content.replace("DeliveredId",String.valueOf(id));
                         content=content.replace("DeliveredToken",generatedString);
-                        return content;
+                        ObjectMapper mapper = new ObjectMapper();
+                        //Converting the Object to JSONString
+                        String jsonString = mapper.writeValueAsString(c);
+                        return jsonString;
                     }else {
-                        return "ID not Found!!";
+                        return "{\"error\":\"Id Not Found\"}";
                     }
                 }
             }
