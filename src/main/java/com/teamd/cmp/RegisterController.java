@@ -17,12 +17,13 @@ public class RegisterController {
     @PostMapping("/register")
     String register(@RequestParam("name") String name,@RequestParam("address") String address,@RequestParam("email") String email,@RequestParam("contact") String contact,@RequestParam("pass") String pass){
         if(name.length()>0 && address.length()>0 && contact.length()>0 && pass.length()>0 && email.length()>0){
+
             if(customerRepository.fetchCustomers(contact).isEmpty()){
                 Customer c=new Customer();
-                c.setContact(contact);
-                c.setAddress(address);
-                c.setEmail(email);
-                c.setName(name);
+                c.setContact(contact.toUpperCase());
+                c.setAddress(address.toUpperCase());
+                c.setEmail(email.toLowerCase());
+                c.setName(name.toUpperCase());
                 c.setPassword(pass);
                 c.setToken(TokenGenerator.newToken());
                 customerRepository.save(c);

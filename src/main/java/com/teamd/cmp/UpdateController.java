@@ -36,11 +36,11 @@ public class UpdateController {
 
 
     private void updateDetails(Customer c,String name, String address,String contact, String pass, String token,String email){
-        c.setName(name);
+        c.setName(name.toUpperCase());
         c.setPassword(pass);
-        c.setEmail(email);
-        c.setAddress(address);
-        c.setContact(contact);
+        c.setEmail(email.toLowerCase());
+        c.setAddress(address.toUpperCase());
+        c.setContact(contact.toUpperCase());
         c.setToken(token);
         customerRepository.save(c);
     }

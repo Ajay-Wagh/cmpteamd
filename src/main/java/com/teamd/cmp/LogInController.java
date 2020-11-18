@@ -35,9 +35,9 @@ public class LogInController {
                     content=content.replace("DeliveredToken",generatedString);
                     content=content.replace("DeliveredEmail",String.valueOf(c.getEmail()));
                     content=content.replace("DeliveredContact",String.valueOf(c.getContact()));
-                    content=content.replace("DeliveredPassword",String.valueOf(c.getPassword()));
                     content=content.replace("DeliveredAddress",String.valueOf(c.getAddress()));
                     content=content.replace("DeliveredType",String.valueOf(type));
+                    content=content.replace("DeliveredPassword",String.valueOf(c.getPassword()));
                     return content;
                 }
             }
